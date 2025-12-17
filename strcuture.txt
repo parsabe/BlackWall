@@ -1,0 +1,65 @@
+<h3 style="margin: 0.75rem 0 0.4rem 0;"> RoBERTa-TF-IDF-PCA Hybrid model</h3>
+
+Robustly Optimized BERT Approach (ROBERTa), as an extension to the Bidirectional Encoder Representation from Transformers (BERT) model, is one of the state-of-the- art deep learning transformer model, which captures deep contextualized word representations, enabling the model to grasp the semantics and nuances of suicidal expressions
+
+The source details a research paper proposing a hybrid machine learning model for the detection and classification of suicidal risk severity using text data from social media, specifically Reddit posts. The core contribution is the development of a RoBERTa-TF-IDF-PCA Hybrid model, which integrates the deep contextual understanding of the transformer model RoBERTa with the statistical term-weighting power of TF-IDF, compressed using Principal Component Analysis (PCA), to assess risk across four levels. The researchers collected and human-labeled a dataset of nearly 3,000 Reddit posts to train and evaluate the model, comparing its performance against standalone deep learning models like BERT and traditional machine learning classifiers. The experimental results suggest the hybrid approach offers improved performance in this critical multi-class classification task, while also exploring data resampling and augmentation techniques to address class imbalance.
+
+#### Limitations
+
+1. Both RoBERTa-base and BERT-base models support a maximum sequence length of 512 tokens. Posts longer than this limit are truncated, which could alter or negatively impact the comprehension of the post's content
+
+2. The combination of the models, is being criticized for their lack of interpretability, high data dependency, and comparatively high computational cost.
+
+
+--
+
+
+## References
+
+
+<div class="references">
+  <p>[1] R. Sawhney, H. Jos
+hi, S. Gandhi, and R. Shah,
+    “A Time-Aware Transformer Based Model for Suicide Ideation Detection on Social Media,”
+    <em>Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP 2020)</em>, 2020.
+  </p>
+
+  <p>[2] J. Pokrywka, J. I. Kaczmarek, and E. J. Gorzelańczyk,
+    “Evaluating Transformer Models for Suicide Risk Detection on Social Media,”
+    in <em>Proc. IEEE International Conference on Big Data (BigData)</em>, 2024.
+  </p>
+
+  <p>[3] T. Markov, C. Zhang, S. Agarwal, T. Eloundou, T. Lee, S. Adler, A. Jiang, and L. Weng,
+    “A Holistic Approach to Undesired Content Detection in the Real World,”
+    in <em>Proceedings of the AAAI Conference on Artificial Intelligence (AAAI)</em>, 2023.
+  </p>
+
+  <p>[4] L. Ouyang, J. Wu, X. Jiang, D. Almeida, C. L. Wainwright, P. Mishkin, C. Zhang, S. Agarwal,
+    et al., “Training Language Models to Follow Instructions with Human Feedback,”
+    in <em>Advances in Neural Information Processing Systems (NeurIPS)</em>, 2022.
+  </p>
+
+  <p>[5] M. R. Meadi, T. Sillekens, S. Metselaar, A. van Balkom, and J. Bernstein,
+    “Exploring the Ethical Challenges of Conversational AI in Mental Health Care: A Scoping Review,”
+    <em>JMIR Mental Health</em>, vol. 12, e47723, 2025.
+  </p>
+
+  <p>[6] L. M. Weisker,
+    <em>AI-Driven Mental Health Chatbots: Perceived Empathy, User Satisfaction and Treatment Outcomes</em>.
+    Wiesbaden: Springer Gabler, BestMasters, 2025.
+  </p>
+
+   <p>[7] Google's Gemini,
+    <em>Nano Banana image generotor model
+  </p>
+
+  <p>[8] B. Gates,
+  “Unconfuse Me with Bill Gates: My conversation with Sam Altman,”
+  <em>Gates Notes – My Podcasts</em>, podcast episode,
+  Jan. 11, 2024. [Online]. Available:
+  <a href="https://www.gatesnotes.com/meet-bill/my-podcasts/reader/unconfuse-me-podcast-with-guest-sam-altman">
+    https://www.gatesnotes.com/meet-bill/my-podcasts/reader/unconfuse-me-podcast-with-guest-sam-altman
+  </a>.
+</p>
+
+</div>
