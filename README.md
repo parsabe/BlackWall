@@ -1,6 +1,13 @@
 # BlackWall
 A Safety Line Against Rogue AI 
 
+
+<p align="center">
+    <img src="assets/logo.png">
+</p>
+
+
+
 ## Abstract
 The increasing integration of social media and conversational AI into daily life has intensified concerns around the spread of harmful, illegal, and psychologically sensitive content, including suicidal ideation, self-harm, depression, and other forms of negative influence. Recent cases of emotional attachment to chatbots and instances where AI systems have unintentionally misled users on mental health issues highlight the urgency of reliable safety mechanisms. This paper presents Blackwall, a domain-aware and interpretable framework designed to identify, assess, and rank high-risk content across online platforms. By operating across heterogeneous data sources and providing transparent risk explanations, Blackwall supports early intervention, responsible moderation, and safer human–AI interaction. The framework aims to contribute toward ethically grounded content safety systems that can mitigate psychological harm while preserving transparency and trust.
 
