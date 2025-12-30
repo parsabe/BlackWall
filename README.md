@@ -38,6 +38,9 @@ The increasing integration of social media and conversational AI into daily life
     containing longer-form texts annotated with a severity score ranging from 0 to 5, reflecting increasing
     levels of suicide risk.
   </p>
+  <p align="center">
+    <img src="assets/mindmap.png">
+</p>
 
   <p>
     To improve robustness under distribution shifts between heterogeneous data sources, Blackwall incorporates
@@ -55,3 +58,7 @@ The increasing integration of social media and conversational AI into daily life
   </p>
 
 </section>
+
+
+
+
