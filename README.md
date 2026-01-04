@@ -25,7 +25,6 @@ The increasing integration of social media and conversational AI into daily life
     datasets originating from online environments, with the primary objective of preventing intelligent systems
     from generating, reinforcing, or amplifying dangerous content.
   </p>
-
   <p>
     The system is designed not only to distinguish between low-risk and high-risk content, but also to provide
     transparent and explainable risk assessments that can support mental health professionals, safety moderators,
