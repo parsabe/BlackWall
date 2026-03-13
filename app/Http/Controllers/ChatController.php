@@ -54,6 +54,8 @@ class ChatController extends Controller
         ]);
     }
 
+     
+    
     /**
      * Calls the Google Gemini API to generate a response.
      */
