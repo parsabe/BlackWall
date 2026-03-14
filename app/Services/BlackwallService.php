@@ -12,7 +12,8 @@ class BlackwallService
     public function __construct()
     {
         // This combines your .env URL with the exact endpoint we just tested
-        $this->url = env('BLACKWALL_API_URL') . '/analyze';
+        $baseUrl = env('BLACKWALL_API_URL', 'http://127.0.0.1:8000');
+        $this->url = rtrim($baseUrl, '/') . '/analyze';
     }
 
     public function isSafe(string $text): bool
