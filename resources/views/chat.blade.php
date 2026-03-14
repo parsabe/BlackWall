@@ -218,82 +218,9 @@
         </div>
     </main>
     <script src="{{ asset('assets/js/chat.js') }}?v={{ time() }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const editBtn = document.getElementById('edit-chat-btn');
-            const deleteBtn = document.getElementById('delete-chat-btn');
-            const actionContainer = document.getElementById('chat-actions-container');
-            const welcomeScreen = document.getElementById('welcome-screen');
+    <script src="{{ asset('assets/js/del-re.js') }}"></script>
 
-            // Try to get active chat ID (either globally set from chat.js or read from the URL)
-            function getChatId() {
-                if (typeof window.currentChatId !== 'undefined' && window.currentChatId) {
-                    return window.currentChatId;
-                }
-                const match = window.location.pathname.match(/\/chat\/(\d+)/);
-                return match ? match[1] : null;
-            }
 
-            // Only display action buttons when inside the actual chat area (welcome screen is hidden)
-            if (welcomeScreen && actionContainer) {
-                const observer = new MutationObserver(() => {
-                    if (welcomeScreen.classList.contains('hidden') || welcomeScreen.style.display === 'none') {
-                        actionContainer.classList.remove('hidden');
-                    } else {
-                        actionContainer.classList.add('hidden');
-                    }
-                });
-                observer.observe(welcomeScreen, { attributes: true, attributeFilter: ['class', 'style'] });
-                
-                // Make sure buttons display correctly on initial load if directly entering a chat
-                if (welcomeScreen.classList.contains('hidden') || welcomeScreen.style.display === 'none' || getChatId()) {
-                    actionContainer.classList.remove('hidden');
-                }
-            }
-
-            if (editBtn) {
-                editBtn.addEventListener('click', async () => {
-                    const chatId = getChatId();
-                    if (!chatId) return alert('No active chat selected.');
-                    
-                    const newTitle = prompt('Enter new chat name:');
-                    if (!newTitle || newTitle.trim() === '') return;
-
-                    try {
-                        const response = await fetch(`/chat/${chatId}/rename`, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                            },
-                            body: JSON.stringify({ title: newTitle.trim() })
-                        });
-                        const data = await response.json();
-                        if (data.success) window.location.reload();
-                        else alert('Failed to rename chat.');
-                    } catch (e) { alert('Error renaming chat.'); }
-                });
-            }
-
-            if (deleteBtn) {
-                deleteBtn.addEventListener('click', async () => {
-                    const chatId = getChatId();
-                    if (!chatId) return alert('No active chat selected.');
-                    if (!confirm('Are you sure you want to delete this chat?')) return;
-
-                    try {
-                        const response = await fetch(`/chat/${chatId}`, {
-                            method: 'DELETE',
-                            headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') }
-                        });
-                        const data = await response.json();
-                        if (data.success) window.location.href = '/chat';
-                        else alert('Failed to delete chat.');
-                    } catch (e) { alert('Error deleting chat.'); }
-                });
-            }
-        });
-    </script>
 </body>
 
 </html>

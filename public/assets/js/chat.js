@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // State
     let chats = JSON.parse(localStorage.getItem('blackwall_chats') || '[]');
     let currentChatId = null;
+    window.currentChatId = null;
 
     // --- Initialization ---
     function updateThemeUI() {
@@ -92,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createNewChat() {
         currentChatId = null;
+        window.currentChatId = null;
         welcomeScreen.classList.remove('hidden');
         messagesContainer.classList.add('hidden');
         messagesContainer.innerHTML = '';
@@ -103,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadChat(id) {
         currentChatId = id;
+        window.currentChatId = id;
         const chat = chats.find(c => c.id === id);
         
         welcomeScreen.classList.add('hidden');
@@ -179,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize Chat if New
         if (!currentChatId) {
             currentChatId = Date.now().toString();
+            window.currentChatId = currentChatId;
             chats.unshift({
                 id: currentChatId,
                 title: text.length > 30 ? text.substring(0, 30) + '...' : text,
