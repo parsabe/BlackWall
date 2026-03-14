@@ -61,7 +61,7 @@ class ChatController extends Controller
      */
     private function askExternalAI(string $prompt): ?string
     {
-        $apiKey = env('GEMINI_API_KEY', 'YOUR_ACTUAL_API_KEY');
+        $apiKey = env('GEMINI_API_KEY');
 
         if (empty($apiKey)) {
             Log::error('Gemini API key is missing from .env');
