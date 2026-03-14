@@ -4,6 +4,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ConversationManagerController;
+
+// Put these near your other chat-related routes
+Route::put('/chat/{id}/rename', [ConversationManagerController::class, 'rename'])->name('chat.rename');
+Route::delete('/chat/{id}', [ConversationManagerController::class, 'destroy'])->name('chat.destroy');
+
+
 Route::get('/', function () {
     return view('chat');
 });
