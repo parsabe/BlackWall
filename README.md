@@ -11,7 +11,7 @@ A Safety Line Against Rogue AI
 
 ### Overview
 <div align="center">
-  <a href="https://youtu.be/y0_I8nw1jCA">
+  <a href="https://github.com/parsabe/BlackWall/blob/master/BlackWall%20Kernel%20Src/assets/tn.png">
     <img src="https://img.youtube.com/vi/y0_I8nw1jCA/maxresdefault.jpg" alt="BlackWall intro" width="100%">
   </a>
   <br>
