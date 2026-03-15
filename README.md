@@ -60,7 +60,7 @@ The increasing integration of social media and conversational AI into daily life
     levels of suicide risk.
   </p>
   <p align="center">
-    <img src="assets/mindmap.png">
+    <img src="https://github.com/parsabe/BlackWall/blob/master/BlackWall%20Kernel%20Src/assets/mindmap.png">
 </p>
 
   <p>
