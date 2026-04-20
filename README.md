@@ -5,7 +5,6 @@ A Safety Line Against Rogue AI
     <img src="https://github.com/parsabe/BlackWall/blob/master/baclwall-poster.png">
 </p>
 
-
 ### Overview
 <div align="center">
   <a href="https://youtu.be/y0_I8nw1jCA">
