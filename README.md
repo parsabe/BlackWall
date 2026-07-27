@@ -1,59 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# BlackWall
+A Safety Line Against Rogue AI 
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <img src="https://github.com/parsabe/BlackWall/blob/master/baclwall-poster.png">
 </p>
 
-## About Laravel
+### Overview
+<div align="center">
+  <a href="https://youtu.be/y0_I8nw1jCA">
+    <img src="https://github.com/parsabe/BlackWall/blob/master/BlackWall%20Kernel%20Src/assets/tn.png" alt="BlackWall intro" width="100%">
+  </a>
+  <br>
+  <b>Click the image to watch the BlackWall intro</b>
+</div>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<div align="center">
+  <a href="https://youtu.be/OFX2ZUcbHWI">
+    <img src="https://img.youtube.com/vi/OFX2ZUcbHWI/maxresdefault.jpg" 
+         alt="Video preview" 
+         width="100%">
+  </a>
+  <br>
+  <b>Click the image to watch the video</b>
+</div>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Abstract
+The increasing integration of social media and conversational AI into daily life has intensified concerns around the spread of harmful, illegal, and psychologically sensitive content, including suicidal ideation, self-harm, depression, and other forms of negative influence. Recent cases of emotional attachment to chatbots and instances where AI systems have unintentionally misled users on mental health issues highlight the urgency of reliable safety mechanisms. This paper presents Blackwall, a domain-aware and interpretable framework designed to identify, assess, and rank high-risk content across online platforms. By operating across heterogeneous data sources and providing transparent risk explanations, Blackwall supports early intervention, responsible moderation, and safer human–AI interaction. The framework aims to contribute toward ethically grounded content safety systems that can mitigate psychological harm while preserving transparency and trust.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+<section id="introduction">
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
 
-## Contributing
+  <p>
+    The <strong>Blackwall</strong> project focuses on developing a reliable and interpretable artificial
+    intelligence system for identifying and assessing
+    <strong>suicidal ideation alongside other harmful, illegal, and psychologically sensitive content</strong>,
+    including self-harm, depression, and broader forms of negative or misleading influence.
+    Rather than operating on social media platforms directly, Blackwall is trained and evaluated on curated
+    datasets originating from online environments, with the primary objective of preventing intelligent systems
+    from generating, reinforcing, or amplifying dangerous content.
+  </p>
+  <p>
+    The system is designed not only to distinguish between low-risk and high-risk content, but also to provide
+    transparent and explainable risk assessments that can support mental health professionals, safety moderators,
+    and the development of responsible AI-driven tools.
+  </p>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+  <p>
+    Blackwall is evaluated using a Twitter-derived dataset consisting of short text samples labeled as
+    <em>“Not Suicide Post”</em> or <em>“Potential Suicide Post”</em>, and a Reddit SuicideWatch–derived dataset
+    containing longer-form texts annotated with a severity score ranging from 0 to 5, reflecting increasing
+    levels of suicide risk.
+  </p>
+  <p align="center">
+    <img src="https://github.com/parsabe/BlackWall/blob/master/BlackWall%20Kernel%20Src/assets/mindmap.png">
+</p>
 
-## Code of Conduct
+  <p>
+    To improve robustness under distribution shifts between heterogeneous data sources, Blackwall incorporates
+    <strong>Domain Adversarial Training (DAT)</strong> to reduce domain-specific bias and encourage
+    domain-invariant representations. In addition, we include a <strong>PAC-oriented evaluation and conditioning
+    strategy</strong> to assess whether learned decision rules generalize consistently under standard learnability
+    assumptions, supporting stable performance as data scale and domains vary.
+  </p>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+  <p>
+     Overall, Blackwall aims to demonstrate how
+    domain-robust and explainable AI can serve as a protective mechanism against unsafe or rogue behavior in
+    intelligent systems, contributing to safer human–AI interaction while adhering to ethical and technical
+    robustness requirements.
+  </p>
 
-## Security Vulnerabilities
+</section>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+

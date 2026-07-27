@@ -1,0 +1,11 @@
+# Ignore all C++ source and header files from the language stats
+*.cpp linguist-vendored
+*.h linguist-vendored
+*.hpp linguist-vendored
+*.cc linguist-vendored
+
+# Specifically target the platform folders where C++ usually lives in Flutter
+ios/* linguist-vendored
+android/* linguist-vendored
+windows/* linguist-vendored
+linux/* linguist-vendored
