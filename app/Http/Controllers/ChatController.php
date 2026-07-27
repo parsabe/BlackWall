@@ -19,84 +19,79 @@ class ChatController extends Controller
     public function sendMessage(Request $request)
     {
         $request->validate(['message' => 'required|string']);
-        $userText = $request->message;
+        $rawText = trim($request->message);
 
-        // 1. Check if User's prompt is safe via Python Blackwall
+        // 1. Process @blackwall command if present
+        $userText = $rawText;
+        if (preg_match('/^@blackwall\b\s*/i', $rawText)) {
+            $userText = trim(preg_replace('/^@blackwall\b\s*/i', '', $rawText));
+            if (empty($userText)) {
+                return response()->json([
+                    'status' => 'success',
+                    'response' => '🛡️ **BlackWall Command Listener Active**\nPlease specify your query following `@blackwall`, e.g.:\n`@blackwall Explain quantum cryptography`'
+                ]);
+            }
+        }
+
+        // 2. Pass prompt through Blackwall Security Layer
         if (!$this->blackwall->isSafe($userText)) {
             return response()->json([
                 'status' => 'rejected',
-                'reason' => 'User input flagged as unsafe.'
+                'reason' => 'User prompt flagged as unsafe by BlackWall security policies.'
             ], 403);
         }
 
-        // 2. Call the REAL Gemini API
-        $aiContent = $this->askExternalAI($userText);
+        // 3. Call local Ollama AI backend
+        $aiContent = $this->askOllama($userText);
 
         if (!$aiContent) {
             return response()->json([
                 'status' => 'error',
-                'reason' => 'Failed to get a response from the AI.'
+                'reason' => 'Failed to retrieve response from local Ollama model.'
             ], 500);
         }
 
-        // 3. Check if AI's response is safe via Python Blackwall
+        // 4. Pass generated AI response through Blackwall Security Layer
         if (!$this->blackwall->isSafe($aiContent)) {
             return response()->json([
                 'status' => 'rejected',
-                'reason' => 'AI output flagged as unsafe.'
+                'reason' => 'AI output flagged as unsafe by BlackWall security policies.'
             ], 403);
         }
 
-        // 4. Return the safe AI response to the user
+        // 5. Return safe AI response
         return response()->json([
             'status' => 'success',
             'response' => $aiContent
         ]);
     }
 
-     
-    
     /**
-     * Calls the Google Gemini API to generate a response.
+     * Calls local Ollama REST API endpoint to generate response.
      */
-    private function askExternalAI(string $prompt): ?string
+    private function askOllama(string $prompt): ?string
     {
-        $apiKey = env('GEMINI_API_KEY');
-
-        if (empty($apiKey)) {
-            Log::error('Gemini API key is missing from .env');
-            return null;
-        }
+        $baseUrl = env('OLLAMA_BASE_URL', 'http://localhost:11434');
+        $model = env('OLLAMA_MODEL', 'qwen3.6:latest');
 
         try {
-            // Using gemini-1.5-flash as it is the fastest and most efficient for chat
-            $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={$apiKey}";
-
-            $response = Http::timeout(15)
-                ->withHeaders([
-                    'Content-Type' => 'application/json',
-                ])
-                ->post($url, [
-                    'contents' => [
-                        [
-                            'parts' => [
-                                ['text' => $prompt]
-                            ]
-                        ]
-                    ]
+            $response = Http::timeout(120)
+                ->withHeaders(['Content-Type' => 'application/json'])
+                ->post(rtrim($baseUrl, '/') . '/api/generate', [
+                    'model' => $model,
+                    'prompt' => $prompt,
+                    'stream' => false,
                 ]);
 
             if ($response->successful()) {
-                // Extract the text from Gemini's JSON response structure
-                return $response->json('candidates.0.content.parts.0.text');
+                return $response->json('response');
             }
 
-            // Log the exact error if Gemini rejects the request
-            Log::error('Gemini API Error: ' . $response->body());
+            Log::error('Ollama API Error: ' . $response->body());
             return null;
 
         } catch (\Exception $e) {
-            Log::error('Failed to connect to Gemini: ' . $e->getMessage());
+            Log::error('Failed to connect to Ollama: ' . $e->getMessage());
             return null;
         }
     }

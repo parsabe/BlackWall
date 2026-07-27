@@ -29,6 +29,11 @@
         };
     </script>
 
+    <!-- Markdown & Syntax Highlighting Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
     <link rel="stylesheet" href="{{ asset('assets/css/chat.css') }}">
 </head>
 
@@ -177,7 +182,7 @@
                 class="flex-1 flex flex-col items-center justify-center w-full max-w-4xl text-center fade-in px-4">
                 <h2
                     class="text-4xl md:text-6xl font-extrabold mb-8 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 leading-tight">
-                    Welcome to Google Gemini<br /><span class="text-3xl md:text-5xl">Secured via BlackWall</span>
+                    Welcome to BlackWall AI<br /><span class="text-3xl md:text-5xl">Powered by Local Ollama</span>
                 </h2>
                 <a href="https://github.com/parsabe/BlackWall" target="_blank"
                     class="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-semibold transition-all hover:scale-105 hover:shadow-xl hover:shadow-gray-900/20 dark:hover:shadow-white/20">

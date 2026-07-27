@@ -144,15 +144,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div>${content}</div>
                 `;
             } else {
-                // Normal AI response (No bubble background, transparent like Gemini)
-                bubble.className = 'text-gray-900 dark:text-gray-100 px-2 py-2 max-w-[95%] sm:max-w-[85%] whitespace-pre-wrap leading-relaxed flex flex-col gap-3 text-[15px]';
+                // Normal AI response with Markdown & Code highlighting
+                let formattedContent = content;
+                if (typeof marked !== 'undefined') {
+                    try {
+                        formattedContent = marked.parse(content);
+                    } catch (e) {
+                        console.error('Markdown parse error:', e);
+                    }
+                }
+
+                bubble.className = 'text-gray-900 dark:text-gray-100 px-2 py-2 max-w-[95%] sm:max-w-[85%] leading-relaxed flex flex-col gap-3 text-[15px]';
                 bubble.innerHTML = `
                     <div class="flex items-center gap-2 font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 pb-1">
                         <svg class="w-5 h-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
                         Black Wall
                     </div>
-                    <div class="prose dark:prose-invert max-w-none">${content}</div>
+                    <div class="markdown-body dark:prose-invert max-w-none">${formattedContent}</div>
                 `;
+
+                setTimeout(() => {
+                    bubble.querySelectorAll('pre code').forEach((block) => {
+                        if (typeof hljs !== 'undefined') {
+                            hljs.highlightElement(block);
+                        }
+                    });
+                }, 10);
             }
         }
         
