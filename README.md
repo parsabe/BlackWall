@@ -2,6 +2,12 @@
 A Safety Line Against Rogue AI 
 
 <p align="center">
+<a  href="https://doi.org/10.5281/zenodo.21924128">
+    <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.21924128.svg" alt="DOI">
+</a>
+</p>
+
+<p align="center">
     <img src="https://github.com/parsabe/BlackWall/blob/master/baclwall-poster.png">
 </p>
 
