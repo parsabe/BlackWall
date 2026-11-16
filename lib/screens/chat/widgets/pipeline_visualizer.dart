@@ -7,10 +7,10 @@ class PipelineVisualizer extends StatelessWidget {
   final bool isLoading;
 
   const PipelineVisualizer({
-    Key? key,
+    super.key,
     this.telemetry,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +46,14 @@ class PipelineVisualizer extends StatelessWidget {
                 const SizedBox(
                   width: 14,
                   height: 14,
-                  child: CircularProgressIndicator(strokeWidth: 2, color: AppTheme.primary),
+                  child: CircularProgressIndicator(
+                      strokeWidth: 2, color: AppTheme.primary),
                 )
               else if (telemetry != null)
                 Text(
                   'Overhead: ${telemetry!.barrierOverheadMs.toStringAsFixed(1)}ms',
-                  style: const TextStyle(fontSize: 11, color: AppTheme.textSecondary),
+                  style: const TextStyle(
+                      fontSize: 11, color: AppTheme.textSecondary),
                 ),
             ],
           ),
@@ -70,7 +72,8 @@ class PipelineVisualizer extends StatelessWidget {
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4),
-                child: Icon(Icons.arrow_forward_ios, size: 12, color: AppTheme.textSecondary),
+                child: Icon(Icons.arrow_forward_ios,
+                    size: 12, color: AppTheme.textSecondary),
               ),
               Expanded(
                 child: _buildStage(
@@ -84,7 +87,8 @@ class PipelineVisualizer extends StatelessWidget {
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4),
-                child: Icon(Icons.arrow_forward_ios, size: 12, color: AppTheme.textSecondary),
+                child: Icon(Icons.arrow_forward_ios,
+                    size: 12, color: AppTheme.textSecondary),
               ),
               Expanded(
                 child: _buildStage(
@@ -112,9 +116,9 @@ class PipelineVisualizer extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.08),
+        color: color.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Column(
         children: [
@@ -156,7 +160,9 @@ class PipelineVisualizer extends StatelessWidget {
 
   Color _getEgressColor() {
     if (telemetry == null) return AppTheme.textSecondary;
-    if (telemetry!.egressClassId == 0 && telemetry!.egressLatencyMs > 0) return AppTheme.safeGreen;
+    if (telemetry!.egressClassId == 0 && telemetry!.egressLatencyMs > 0) {
+      return AppTheme.safeGreen;
+    }
     if (telemetry!.egressClassId != 0) return AppTheme.criticalRed;
     return AppTheme.textSecondary;
   }

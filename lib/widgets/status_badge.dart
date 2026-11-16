@@ -4,7 +4,7 @@ import '../core/theme/app_theme.dart';
 class StatusBadge extends StatelessWidget {
   final String status;
 
-  const StatusBadge({Key? key, required this.status}) : super(key: key);
+  const StatusBadge({super.key, required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -15,31 +15,31 @@ class StatusBadge extends StatelessWidget {
 
     switch (status.toLowerCase()) {
       case 'released':
-        bg = AppTheme.safeGreen.withOpacity(0.15);
+        bg = AppTheme.safeGreen.withValues(alpha: 0.15);
         fg = AppTheme.safeGreen;
         icon = Icons.verified_user_outlined;
         label = 'RELEASED (VETTED)';
         break;
       case 'blocked_ingress':
-        bg = AppTheme.criticalRed.withOpacity(0.15);
+        bg = AppTheme.criticalRed.withValues(alpha: 0.15);
         fg = AppTheme.criticalRed;
         icon = Icons.block;
         label = 'BLOCKED: INGRESS';
         break;
       case 'blocked_egress':
-        bg = Colors.purpleAccent.withOpacity(0.15);
+        bg = Colors.purpleAccent.withValues(alpha: 0.15);
         fg = Colors.purpleAccent;
         icon = Icons.shield_outlined;
         label = 'BLOCKED: EGRESS';
         break;
       case 'offline':
-        bg = AppTheme.warningAmber.withOpacity(0.15);
+        bg = AppTheme.warningAmber.withValues(alpha: 0.15);
         fg = AppTheme.warningAmber;
         icon = Icons.cloud_off;
         label = 'FAIL-CLOSED (OFFLINE)';
         break;
       default:
-        bg = Colors.grey.withOpacity(0.15);
+        bg = Colors.grey.withValues(alpha: 0.15);
         fg = Colors.grey;
         icon = Icons.hourglass_top;
         label = status.toUpperCase();
@@ -50,7 +50,8 @@ class StatusBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(6),
-        border: Border.parseBorder(Border.all(color: fg.withOpacity(0.4), width: 1)),
+        border: Border.parseBorder(
+            Border.all(color: fg.withValues(alpha: 0.4), width: 1)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

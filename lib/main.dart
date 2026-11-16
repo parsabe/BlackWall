@@ -38,11 +38,11 @@ class BlackWallApp extends StatelessWidget {
   final BlackWallService blackwallService;
 
   const BlackWallApp({
-    Key? key,
+    super.key,
     required this.storageService,
     required this.authService,
     required this.blackwallService,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

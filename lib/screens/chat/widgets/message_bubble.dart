@@ -7,7 +7,7 @@ import 'telemetry_card.dart';
 class MessageBubble extends StatelessWidget {
   final ChatMessage message;
 
-  const MessageBubble({Key? key, required this.message}) : super(key: key);
+  const MessageBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,8 @@ class MessageBubble extends StatelessWidget {
         alignment: Alignment.centerRight,
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
-          constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.78),
+          constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width * 0.78),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           decoration: BoxDecoration(
             color: const Color(0xFF1E3A8A), // Deep Navy
@@ -26,7 +27,7 @@ class MessageBubble extends StatelessWidget {
               bottomLeft: Radius.circular(12),
               bottomRight: Radius.circular(2),
             ),
-            border: Border.all(color: Colors.blueAccent.withOpacity(0.3)),
+            border: Border.all(color: Colors.blueAccent.withValues(alpha: 0.3)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -43,7 +44,8 @@ class MessageBubble extends StatelessWidget {
               const SizedBox(height: 4),
               SelectableText(
                 message.text,
-                style: const TextStyle(fontSize: 14, color: Colors.white, height: 1.4),
+                style: const TextStyle(
+                    fontSize: 14, color: Colors.white, height: 1.4),
               ),
             ],
           ),
@@ -56,7 +58,8 @@ class MessageBubble extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.90),
+        constraints:
+            BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.90),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: AppTheme.surface,
@@ -147,13 +150,13 @@ class MessageBubble extends StatelessWidget {
   Color _getBorderColor(String status) {
     switch (status) {
       case 'released':
-        return AppTheme.safeGreen.withOpacity(0.5);
+        return AppTheme.safeGreen.withValues(alpha: 0.5);
       case 'blocked_ingress':
-        return AppTheme.criticalRed.withOpacity(0.5);
+        return AppTheme.criticalRed.withValues(alpha: 0.5);
       case 'blocked_egress':
-        return Colors.purpleAccent.withOpacity(0.5);
+        return Colors.purpleAccent.withValues(alpha: 0.5);
       case 'offline':
-        return AppTheme.warningAmber.withOpacity(0.5);
+        return AppTheme.warningAmber.withValues(alpha: 0.5);
       default:
         return AppTheme.border;
     }
@@ -162,12 +165,12 @@ class MessageBubble extends StatelessWidget {
   Color _getAlertBgColor(String status) {
     switch (status) {
       case 'released':
-        return AppTheme.safeGreen.withOpacity(0.1);
+        return AppTheme.safeGreen.withValues(alpha: 0.1);
       case 'blocked_ingress':
       case 'blocked_egress':
-        return AppTheme.criticalRed.withOpacity(0.12);
+        return AppTheme.criticalRed.withValues(alpha: 0.12);
       case 'offline':
-        return AppTheme.warningAmber.withOpacity(0.12);
+        return AppTheme.warningAmber.withValues(alpha: 0.12);
       default:
         return AppTheme.surfaceLight;
     }

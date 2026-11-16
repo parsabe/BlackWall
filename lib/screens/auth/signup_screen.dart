@@ -4,7 +4,7 @@ import '../../core/theme/app_theme.dart';
 import '../../providers/auth_provider.dart';
 
 class SignupScreen extends StatefulWidget {
-  const SignupScreen({Key? key}) : super(key: key);
+  const SignupScreen({super.key});
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
@@ -75,7 +75,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(height: 6),
                       const Text(
                         'Enrolls identity into the BlackWall secure enclave.',
-                        style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
+                        style: TextStyle(
+                            fontSize: 12, color: AppTheme.textSecondary),
                       ),
                       const SizedBox(height: 20),
 
@@ -84,18 +85,23 @@ class _SignupScreenState extends State<SignupScreen> {
                           margin: const EdgeInsets.only(bottom: 16),
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: AppTheme.criticalRed.withOpacity(0.12),
+                            color: AppTheme.criticalRed.withValues(alpha: 0.12),
                             borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: AppTheme.criticalRed.withOpacity(0.4)),
+                            border: Border.all(
+                                color: AppTheme.criticalRed
+                                    .withValues(alpha: 0.4)),
                           ),
                           child: Text(
                             auth.errorMessage!,
-                            style: const TextStyle(color: AppTheme.criticalRed, fontSize: 12),
+                            style: const TextStyle(
+                                color: AppTheme.criticalRed, fontSize: 12),
                           ),
                         ),
 
                       // Name
-                      const Text('FULL OPERATOR NAME', style: TextStyle(fontSize: 11, color: AppTheme.textSecondary)),
+                      const Text('FULL OPERATOR NAME',
+                          style: TextStyle(
+                              fontSize: 11, color: AppTheme.textSecondary)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _nameController,
@@ -103,12 +109,16 @@ class _SignupScreenState extends State<SignupScreen> {
                           prefixIcon: Icon(Icons.badge_outlined, size: 18),
                           hintText: 'Agent Walker',
                         ),
-                        validator: (val) => (val == null || val.trim().isEmpty) ? 'Name is required' : null,
+                        validator: (val) => (val == null || val.trim().isEmpty)
+                            ? 'Name is required'
+                            : null,
                       ),
                       const SizedBox(height: 14),
 
                       // Email
-                      const Text('OFFICIAL EMAIL', style: TextStyle(fontSize: 11, color: AppTheme.textSecondary)),
+                      const Text('OFFICIAL EMAIL',
+                          style: TextStyle(
+                              fontSize: 11, color: AppTheme.textSecondary)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _emailController,
@@ -118,7 +128,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           hintText: 'walker@blackwall.sec',
                         ),
                         validator: (val) {
-                          if (val == null || val.trim().isEmpty) return 'Email is required';
+                          if (val == null || val.trim().isEmpty) {
+                            return 'Email is required';
+                          }
                           if (!val.contains('@')) return 'Enter a valid email';
                           return null;
                         },
@@ -126,7 +138,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(height: 14),
 
                       // Password
-                      const Text('CREATE PASSKEY', style: TextStyle(fontSize: 11, color: AppTheme.textSecondary)),
+                      const Text('CREATE PASSKEY',
+                          style: TextStyle(
+                              fontSize: 11, color: AppTheme.textSecondary)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _passwordController,
@@ -135,26 +149,38 @@ class _SignupScreenState extends State<SignupScreen> {
                           prefixIcon: const Icon(Icons.lock_outline, size: 18),
                           hintText: '••••••••••••',
                           suffixIcon: IconButton(
-                            icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility, size: 18),
-                            onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                            icon: Icon(
+                                _obscurePassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                size: 18),
+                            onPressed: () => setState(
+                                () => _obscurePassword = !_obscurePassword),
                           ),
                         ),
-                        validator: (val) => (val == null || val.length < 6) ? 'Min 6 characters' : null,
+                        validator: (val) => (val == null || val.length < 6)
+                            ? 'Min 6 characters'
+                            : null,
                       ),
                       const SizedBox(height: 14),
 
                       // Confirm Password
-                      const Text('CONFIRM PASSKEY', style: TextStyle(fontSize: 11, color: AppTheme.textSecondary)),
+                      const Text('CONFIRM PASSKEY',
+                          style: TextStyle(
+                              fontSize: 11, color: AppTheme.textSecondary)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _confirmController,
                         obscureText: _obscurePassword,
                         decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.check_circle_outline, size: 18),
+                          prefixIcon:
+                              Icon(Icons.check_circle_outline, size: 18),
                           hintText: '••••••••••••',
                         ),
                         validator: (val) {
-                          if (val != _passwordController.text) return 'Passwords do not match';
+                          if (val != _passwordController.text) {
+                            return 'Passwords do not match';
+                          }
                           return null;
                         },
                       ),
@@ -166,7 +192,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             ? const SizedBox(
                                 height: 18,
                                 width: 18,
-                                child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black),
+                                child: CircularProgressIndicator(
+                                    strokeWidth: 2, color: Colors.black),
                               )
                             : const Text('REGISTER & INITIALIZE'),
                       ),

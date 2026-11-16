@@ -5,7 +5,7 @@ import '../../providers/auth_provider.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -13,7 +13,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController(text: 'operator@blackwall.sec');
+  final _emailController =
+      TextEditingController(text: 'operator@blackwall.sec');
   final _passwordController = TextEditingController(text: 'BlackWall2026!');
   bool _obscurePassword = true;
 
@@ -56,11 +57,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 56,
                           height: 56,
                           decoration: BoxDecoration(
-                            color: AppTheme.primary.withOpacity(0.12),
+                            color: AppTheme.primary.withValues(alpha: 0.12),
                             shape: BoxShape.circle,
-                            border: Border.all(color: AppTheme.primary, width: 1.5),
+                            border:
+                                Border.all(color: AppTheme.primary, width: 1.5),
                           ),
-                          child: const Icon(Icons.shield, color: AppTheme.primary, size: 28),
+                          child: const Icon(Icons.shield,
+                              color: AppTheme.primary, size: 28),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -78,7 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Text(
                         'Zero-Trust AI Guardrail Authorization',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
+                        style: TextStyle(
+                            fontSize: 12, color: AppTheme.textSecondary),
                       ),
                       const SizedBox(height: 24),
 
@@ -88,18 +92,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           margin: const EdgeInsets.only(bottom: 16),
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: AppTheme.criticalRed.withOpacity(0.12),
+                            color: AppTheme.criticalRed.withValues(alpha: 0.12),
                             borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: AppTheme.criticalRed.withOpacity(0.4)),
+                            border: Border.all(
+                                color: AppTheme.criticalRed
+                                    .withValues(alpha: 0.4)),
                           ),
                           child: Row(
                             children: [
-                              const Icon(Icons.error_outline, color: AppTheme.criticalRed, size: 18),
+                              const Icon(Icons.error_outline,
+                                  color: AppTheme.criticalRed, size: 18),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
                                   auth.errorMessage!,
-                                  style: const TextStyle(color: AppTheme.criticalRed, fontSize: 12),
+                                  style: const TextStyle(
+                                      color: AppTheme.criticalRed,
+                                      fontSize: 12),
                                 ),
                               ),
                             ],
@@ -107,7 +116,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
 
                       // Email Field
-                      const Text('OPERATOR IDENTITY / EMAIL', style: TextStyle(fontSize: 11, color: AppTheme.textSecondary)),
+                      const Text('OPERATOR IDENTITY / EMAIL',
+                          style: TextStyle(
+                              fontSize: 11, color: AppTheme.textSecondary)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _emailController,
@@ -117,15 +128,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           hintText: 'user@blackwall.sec',
                         ),
                         validator: (value) {
-                          if (value == null || value.trim().isEmpty) return 'Email is required';
-                          if (!value.contains('@')) return 'Enter a valid email';
+                          if (value == null || value.trim().isEmpty) {
+                            return 'Email is required';
+                          }
+                          if (!value.contains('@')) {
+                            return 'Enter a valid email';
+                          }
                           return null;
                         },
                       ),
                       const SizedBox(height: 16),
 
                       // Password Field
-                      const Text('SECURITY PASSKEY', style: TextStyle(fontSize: 11, color: AppTheme.textSecondary)),
+                      const Text('SECURITY PASSKEY',
+                          style: TextStyle(
+                              fontSize: 11, color: AppTheme.textSecondary)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _passwordController,
@@ -135,16 +152,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           hintText: '••••••••••••',
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                              _obscurePassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                               size: 18,
                               color: AppTheme.textSecondary,
                             ),
-                            onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                            onPressed: () => setState(
+                                () => _obscurePassword = !_obscurePassword),
                           ),
                         ),
                         validator: (value) {
-                          if (value == null || value.isEmpty) return 'Password is required';
-                          if (value.length < 6) return 'Minimum 6 characters required';
+                          if (value == null || value.isEmpty) {
+                            return 'Password is required';
+                          }
+                          if (value.length < 6) {
+                            return 'Minimum 6 characters required';
+                          }
                           return null;
                         },
                       ),
@@ -157,7 +181,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ? const SizedBox(
                                 height: 18,
                                 width: 18,
-                                child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black),
+                                child: CircularProgressIndicator(
+                                    strokeWidth: 2, color: Colors.black),
                               )
                             : const Text('AUTHENTICATE SESSION'),
                       ),
@@ -167,12 +192,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => const SignupScreen()),
+                            MaterialPageRoute(
+                                builder: (_) => const SignupScreen()),
                           );
                         },
                         child: const Text(
                           'Need new clearance? Request Account',
-                          style: TextStyle(color: AppTheme.primary, fontSize: 12),
+                          style:
+                              TextStyle(color: AppTheme.primary, fontSize: 12),
                         ),
                       ),
                     ],

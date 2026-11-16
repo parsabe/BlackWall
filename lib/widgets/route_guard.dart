@@ -6,13 +6,14 @@ import '../screens/auth/login_screen.dart';
 class RouteGuard extends StatelessWidget {
   final Widget child;
 
-  const RouteGuard({Key? key, required this.child}) : super(key: key);
+  const RouteGuard({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
 
-    if (auth.status == AuthStatus.uninitialized || auth.status == AuthStatus.authenticating) {
+    if (auth.status == AuthStatus.uninitialized ||
+        auth.status == AuthStatus.authenticating) {
       return const Scaffold(
         body: Center(
           child: Column(

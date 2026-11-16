@@ -5,7 +5,7 @@ import '../../../models/telemetry_model.dart';
 class TelemetryCard extends StatelessWidget {
   final TelemetryModel telemetry;
 
-  const TelemetryCard({Key? key, required this.telemetry}) : super(key: key);
+  const TelemetryCard({super.key, required this.telemetry});
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +44,25 @@ class TelemetryCard extends StatelessWidget {
                 label: 'Ingress Latency',
                 value: '${telemetry.ingressLatencyMs.toStringAsFixed(1)} ms',
                 status: telemetry.ingressStatusLabel,
-                statusColor: telemetry.ingressClassId == 0 ? AppTheme.safeGreen : AppTheme.criticalRed,
+                statusColor: telemetry.ingressClassId == 0
+                    ? AppTheme.safeGreen
+                    : AppTheme.criticalRed,
               ),
               _metricItem(
                 label: 'Gemma 3 1B Inference',
                 value: '${telemetry.llmLatencyMs.toStringAsFixed(1)} ms',
                 status: telemetry.llmLatencyMs > 0 ? 'Executed' : 'Skipped',
-                statusColor: telemetry.llmLatencyMs > 0 ? AppTheme.primary : AppTheme.textSecondary,
+                statusColor: telemetry.llmLatencyMs > 0
+                    ? AppTheme.primary
+                    : AppTheme.textSecondary,
               ),
               _metricItem(
                 label: 'Egress Latency',
                 value: '${telemetry.egressLatencyMs.toStringAsFixed(1)} ms',
                 status: telemetry.egressStatusLabel,
-                statusColor: telemetry.egressClassId == 0 ? AppTheme.safeGreen : AppTheme.criticalRed,
+                statusColor: telemetry.egressClassId == 0
+                    ? AppTheme.safeGreen
+                    : AppTheme.criticalRed,
               ),
               _metricItem(
                 label: 'Barrier Overhead',
@@ -106,7 +112,7 @@ class TelemetryCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
               decoration: BoxDecoration(
-                color: statusColor.withOpacity(0.15),
+                color: statusColor.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(

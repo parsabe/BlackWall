@@ -7,7 +7,7 @@ import '../../providers/auth_provider.dart';
 import '../../providers/settings_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -56,7 +56,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: [
                         const Row(
                           children: [
-                            Icon(Icons.router_outlined, color: AppTheme.primary, size: 20),
+                            Icon(Icons.router_outlined,
+                                color: AppTheme.primary, size: 20),
                             SizedBox(width: 8),
                             Text(
                               'ENDPOINT CONNECTIVITY',
@@ -71,13 +72,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         const SizedBox(height: 12),
                         const Text(
                           'Select the target BlackWall Guardrail Gateway. All prompts are routed through Ingress -> Brain -> Egress inspection.',
-                          style: TextStyle(fontSize: 12, color: AppTheme.textSecondary),
+                          style: TextStyle(
+                              fontSize: 12, color: AppTheme.textSecondary),
                         ),
                         const SizedBox(height: 16),
-
                         RadioListTile<ServerMode>(
-                          title: const Text('Production Remote Gateway', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-                          subtitle: const Text(AppConstants.defaultRemoteGateway, style: TextStyle(fontSize: 11, color: AppTheme.primary)),
+                          title: const Text('Production Remote Gateway',
+                              style: TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.bold)),
+                          subtitle: const Text(
+                              AppConstants.defaultRemoteGateway,
+                              style: TextStyle(
+                                  fontSize: 11, color: AppTheme.primary)),
                           value: ServerMode.remoteGateway,
                           groupValue: config.mode,
                           onChanged: (val) {
@@ -85,10 +91,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           },
                         ),
                         const Divider(height: 1, color: AppTheme.border),
-
                         RadioListTile<ServerMode>(
-                          title: const Text('Local Host Gateway (Docker / K8s)', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-                          subtitle: const Text('http://127.0.0.1:8080/sandbox (Ports 8000 & 11434)', style: TextStyle(fontSize: 11, color: AppTheme.primary)),
+                          title: const Text('Local Host Gateway (Docker / K8s)',
+                              style: TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.bold)),
+                          subtitle: const Text(
+                              'http://127.0.0.1:8080/sandbox (Ports 8000 & 11434)',
+                              style: TextStyle(
+                                  fontSize: 11, color: AppTheme.primary)),
                           value: ServerMode.localGateway,
                           groupValue: config.mode,
                           onChanged: (val) {
@@ -96,17 +106,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           },
                         ),
                         const Divider(height: 1, color: AppTheme.border),
-
                         RadioListTile<ServerMode>(
-                          title: const Text('Custom Dedicated Endpoint', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-                          subtitle: const Text('Point to private or enterprise gateway', style: TextStyle(fontSize: 11, color: AppTheme.textSecondary)),
+                          title: const Text('Custom Dedicated Endpoint',
+                              style: TextStyle(
+                                  fontSize: 13, fontWeight: FontWeight.bold)),
+                          subtitle: const Text(
+                              'Point to private or enterprise gateway',
+                              style: TextStyle(
+                                  fontSize: 11, color: AppTheme.textSecondary)),
                           value: ServerMode.custom,
                           groupValue: config.mode,
                           onChanged: (val) {
                             if (val != null) settings.updateMode(val);
                           },
                         ),
-
                         if (config.mode == ServerMode.custom) ...[
                           const SizedBox(height: 12),
                           TextField(
@@ -116,7 +129,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               labelText: 'Custom Gateway URL',
                             ),
                             onChanged: (val) {
-                              settings.updateMode(ServerMode.custom, customUrl: val.trim());
+                              settings.updateMode(ServerMode.custom,
+                                  customUrl: val.trim());
                             },
                           ),
                         ],
@@ -135,7 +149,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: [
                         const Row(
                           children: [
-                            Icon(Icons.timer_outlined, color: AppTheme.warningAmber, size: 20),
+                            Icon(Icons.timer_outlined,
+                                color: AppTheme.warningAmber, size: 20),
                             SizedBox(width: 8),
                             Text(
                               'HARDWARE & TIMEOUT TOLERANCE',
@@ -151,21 +166,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: AppTheme.warningAmber.withOpacity(0.1),
+                            color: AppTheme.warningAmber.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: AppTheme.warningAmber.withOpacity(0.3)),
+                            border: Border.all(
+                                color: AppTheme.warningAmber
+                                    .withValues(alpha: 0.3)),
                           ),
                           child: const Text(
                             'Notice: Dual-barrier classification plus Gemma 3 1B inference window on CPU hosts can reach 60s to 100s. Adjust timeout accordingly to prevent false fail-closed triggers.',
-                            style: TextStyle(fontSize: 12, color: AppTheme.warningAmber, height: 1.4),
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: AppTheme.warningAmber,
+                                height: 1.4),
                           ),
                         ),
                         const SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text('Request Timeout Limit', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                            Text('${config.timeoutSeconds} seconds', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppTheme.primary)),
+                            const Text('Request Timeout Limit',
+                                style: TextStyle(
+                                    fontSize: 13, fontWeight: FontWeight.w600)),
+                            Text('${config.timeoutSeconds} seconds',
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppTheme.primary)),
                           ],
                         ),
                         Slider(
@@ -181,9 +207,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('15s (GPU Quick)', style: TextStyle(fontSize: 10, color: AppTheme.textSecondary)),
-                            Text('90s (Recommended CPU)', style: TextStyle(fontSize: 10, color: AppTheme.safeGreen)),
-                            Text('180s (Deep Reasoning)', style: TextStyle(fontSize: 10, color: AppTheme.textSecondary)),
+                            Text('15s (GPU Quick)',
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: AppTheme.textSecondary)),
+                            Text('90s (Recommended CPU)',
+                                style: TextStyle(
+                                    fontSize: 10, color: AppTheme.safeGreen)),
+                            Text('180s (Deep Reasoning)',
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: AppTheme.textSecondary)),
                           ],
                         ),
                       ],
@@ -201,28 +235,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: [
                         const Row(
                           children: [
-                            Icon(Icons.person_pin_outlined, color: AppTheme.primary, size: 20),
+                            Icon(Icons.person_pin_outlined,
+                                color: AppTheme.primary, size: 20),
                             SizedBox(width: 8),
                             Text(
                               'OPERATOR IDENTITY',
-                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, letterSpacing: 1.2),
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.2),
                             ),
                           ],
                         ),
                         const SizedBox(height: 14),
-                        Text('Operator: ${auth.currentUser?.name ?? "Anonymous"}', style: const TextStyle(fontSize: 13)),
+                        Text(
+                            'Operator: ${auth.currentUser?.name ?? "Anonymous"}',
+                            style: const TextStyle(fontSize: 13)),
                         const SizedBox(height: 4),
-                        Text('Email: ${auth.currentUser?.email ?? "N/A"}', style: const TextStyle(fontSize: 12, color: AppTheme.textSecondary)),
+                        Text('Email: ${auth.currentUser?.email ?? "N/A"}',
+                            style: const TextStyle(
+                                fontSize: 12, color: AppTheme.textSecondary)),
                         const SizedBox(height: 4),
-                        Text('Session Token: ${auth.currentUser?.token.substring(0, 16)}...', style: const TextStyle(fontSize: 11, color: AppTheme.textSecondary)),
+                        Text(
+                            'Session Token: ${auth.currentUser?.token.substring(0, 16)}...',
+                            style: const TextStyle(
+                                fontSize: 11, color: AppTheme.textSecondary)),
                         const SizedBox(height: 18),
                         OutlinedButton.icon(
                           onPressed: () async {
                             await auth.logout();
                             if (mounted) Navigator.of(context).pop();
                           },
-                          icon: const Icon(Icons.logout, size: 16, color: AppTheme.criticalRed),
-                          label: const Text('TERMINATE OPERATOR SESSION', style: TextStyle(color: AppTheme.criticalRed, fontSize: 12)),
+                          icon: const Icon(Icons.logout,
+                              size: 16, color: AppTheme.criticalRed),
+                          label: const Text('TERMINATE OPERATOR SESSION',
+                              style: TextStyle(
+                                  color: AppTheme.criticalRed, fontSize: 12)),
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(color: AppTheme.criticalRed),
                           ),
