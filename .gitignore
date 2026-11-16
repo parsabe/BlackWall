@@ -1,0 +1,19 @@
+# Compiled binaries and temporary files
+*.pyc
+__pycache__/
+*.so
+*.dylib
+.DS_Store
+.idea/
+.vscode/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Environment
+.env
+.env.local
+venv/
+.venv/
