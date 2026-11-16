@@ -1,0 +1,9 @@
+{
+  "name": "BlackWall Guardrail",
+  "short_name": "BlackWall",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#090D16",
+  "theme_color": "#06B6D4",
+  "description": "BlackWall - Autonomous AI Safety Barrier & Execution Sandbox"
+}
