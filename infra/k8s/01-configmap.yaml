@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blackwall-config
+  namespace: blackwall-system
+data:
+  CLASSIFIER_URL: "http://blackwall-classifier.blackwall-system.svc.cluster.local:8000"
+  OLLAMA_URL: "http://blackwall-ollama.blackwall-system.svc.cluster.local:11434"
+  OLLAMA_MODEL: "gemma3:1b"
+  GATEWAY_TIMEOUT_SEC: "120.0"

@@ -1,0 +1,18 @@
+{
+  "service": "ollama",
+  "endpoint": "http://127.0.0.1:11434",
+  "chat_route": "/api/chat",
+  "model": "gemma3:1b",
+  "custom_model": "blackwall-gemma:latest",
+  "parameters": {
+    "num_ctx": 2048,
+    "keep_alive": -1,
+    "temperature": 0.7,
+    "top_p": 0.9
+  },
+  "hardware_profile": {
+    "recommended_threads": 4,
+    "cpu_inference_window_sec": "60-100",
+    "gpu_acceleration": "optional"
+  }
+}
