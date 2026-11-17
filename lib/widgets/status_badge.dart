@@ -50,8 +50,7 @@ class StatusBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(6),
-        border: Border.parseBorder(
-            Border.all(color: fg.withValues(alpha: 0.4), width: 1)),
+        border: Border.all(color: fg.withValues(alpha: 0.4), width: 1),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

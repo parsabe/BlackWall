@@ -72,26 +72,33 @@ class MessageBubble extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Row(
-                  children: [
-                    Icon(Icons.shield, size: 14, color: AppTheme.primary),
-                    SizedBox(width: 6),
-                    Text(
-                      'BLACKWALL DEFENSE CORE',
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 0.8,
-                        color: AppTheme.textPrimary,
+            SizedBox(
+              width: double.infinity,
+              child: Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8,
+                runSpacing: 6,
+                children: [
+                  const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.shield, size: 14, color: AppTheme.primary),
+                      SizedBox(width: 6),
+                      Text(
+                        'BLACKWALL DEFENSE CORE',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.8,
+                          color: AppTheme.textPrimary,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                StatusBadge(status: message.status),
-              ],
+                    ],
+                  ),
+                  StatusBadge(status: message.status),
+                ],
+              ),
             ),
             const Divider(height: 16, color: AppTheme.border),
 
