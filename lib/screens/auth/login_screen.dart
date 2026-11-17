@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../providers/auth_provider.dart';
+import 'forgot_password_screen.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -62,27 +63,27 @@ class _LoginScreenState extends State<LoginScreen> {
                             border:
                                 Border.all(color: AppTheme.primary, width: 1.5),
                           ),
-                          child: const Icon(Icons.shield,
+                          child: Icon(Icons.shield,
                               color: AppTheme.primary, size: 28),
                         ),
                       ),
                       const SizedBox(height: 16),
-                      const Text(
+                      Text(
                         'BLACKWALL ACCESS',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2.0,
-                          color: AppTheme.textPrimary,
+                          
                         ),
                       ),
                       const SizedBox(height: 6),
-                      const Text(
+                      Text(
                         'Zero-Trust AI Guardrail Authorization',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 12, color: AppTheme.textSecondary),
+                            fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
                       ),
                       const SizedBox(height: 24),
 
@@ -100,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: Row(
                             children: [
-                              const Icon(Icons.error_outline,
+                              Icon(Icons.error_outline,
                                   color: AppTheme.criticalRed, size: 18),
                               const SizedBox(width: 8),
                               Expanded(
@@ -116,9 +117,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
 
                       // Email Field
-                      const Text('OPERATOR IDENTITY / EMAIL',
+                      Text('OPERATOR IDENTITY / EMAIL',
                           style: TextStyle(
-                              fontSize: 11, color: AppTheme.textSecondary)),
+                              fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _emailController,
@@ -140,15 +141,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 16),
 
                       // Password Field
-                      const Text('SECURITY PASSKEY',
+                      Text('SECURITY PASSKEY',
                           style: TextStyle(
-                              fontSize: 11, color: AppTheme.textSecondary)),
+                              fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _passwordController,
                         obscureText: _obscurePassword,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.lock_outline, size: 18),
+                          prefixIcon: Icon(Icons.lock_outline, size: 18),
                           hintText: '••••••••••••',
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -156,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ? Icons.visibility_off
                                   : Icons.visibility,
                               size: 18,
-                              color: AppTheme.textSecondary,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
                             onPressed: () => setState(
                                 () => _obscurePassword = !_obscurePassword),
@@ -172,7 +173,28 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 8),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            auth.clearError();
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const ForgotPasswordScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Forgot password?',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
 
                       // Submit Button
                       ElevatedButton(
@@ -184,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: CircularProgressIndicator(
                                     strokeWidth: 2, color: Colors.black),
                               )
-                            : const Text('AUTHENTICATE SESSION'),
+                            : Text('AUTHENTICATE SESSION'),
                       ),
                       const SizedBox(height: 16),
 
@@ -196,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 builder: (_) => const SignupScreen()),
                           );
                         },
-                        child: const Text(
+                        child: Text(
                           'Need new clearance? Request Account',
                           style:
                               TextStyle(color: AppTheme.primary, fontSize: 12),

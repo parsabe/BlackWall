@@ -9,36 +9,42 @@ class TelemetryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final primary = theme.colorScheme.primary;
+    final surfaceSecondary = theme.colorScheme.surfaceContainerHighest;
+    final borderColor = theme.dividerColor;
+    final onSurface = theme.colorScheme.onSurface;
+    final onSurfaceVariant = theme.colorScheme.onSurfaceVariant;
+
     return Container(
-      margin: const EdgeInsets.only(top: 8),
+      margin: const EdgeInsets.only(top: 10),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppTheme.surfaceLight,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: AppTheme.border),
+        color: surfaceSecondary,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: borderColor),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.speed, size: 14, color: AppTheme.primary),
-              SizedBox(width: 6),
+              Icon(Icons.speed, size: 14, color: primary),
+              const SizedBox(width: 6),
               Text(
-                'BARRIER TRACE TELEMETRY',
+                'Trace Telemetry',
                 style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.0,
-                  color: AppTheme.primary,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: primary,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8),
           Wrap(
-            spacing: 12,
-            runSpacing: 6,
+            spacing: 14,
+            runSpacing: 8,
             children: [
               _metricItem(
                 label: 'Ingress Latency',
@@ -47,14 +53,17 @@ class TelemetryCard extends StatelessWidget {
                 statusColor: telemetry.ingressClassId == 0
                     ? AppTheme.safeGreen
                     : AppTheme.criticalRed,
+                onSurface: onSurface,
+                onSurfaceVariant: onSurfaceVariant,
               ),
               _metricItem(
                 label: 'Gemma 3 1B Inference',
                 value: '${telemetry.llmLatencyMs.toStringAsFixed(1)} ms',
                 status: telemetry.llmLatencyMs > 0 ? 'Executed' : 'Skipped',
-                statusColor: telemetry.llmLatencyMs > 0
-                    ? AppTheme.primary
-                    : AppTheme.textSecondary,
+                statusColor:
+                    telemetry.llmLatencyMs > 0 ? primary : onSurfaceVariant,
+                onSurface: onSurface,
+                onSurfaceVariant: onSurfaceVariant,
               ),
               _metricItem(
                 label: 'Egress Latency',
@@ -63,18 +72,24 @@ class TelemetryCard extends StatelessWidget {
                 statusColor: telemetry.egressClassId == 0
                     ? AppTheme.safeGreen
                     : AppTheme.criticalRed,
+                onSurface: onSurface,
+                onSurfaceVariant: onSurfaceVariant,
               ),
               _metricItem(
                 label: 'Barrier Overhead',
                 value: '${telemetry.barrierOverheadMs.toStringAsFixed(1)} ms',
                 status: 'Dual-Barrier',
                 statusColor: AppTheme.warningAmber,
+                onSurface: onSurface,
+                onSurfaceVariant: onSurfaceVariant,
               ),
               _metricItem(
                 label: 'Total Latency',
                 value: '${telemetry.totalLatencyMs.toStringAsFixed(1)} ms',
                 status: 'End-to-End',
-                statusColor: AppTheme.textPrimary,
+                statusColor: onSurface,
+                onSurface: onSurface,
+                onSurfaceVariant: onSurfaceVariant,
               ),
             ],
           ),
@@ -88,13 +103,15 @@ class TelemetryCard extends StatelessWidget {
     required String value,
     required String status,
     required Color statusColor,
+    required Color onSurface,
+    required Color onSurfaceVariant,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 10, color: AppTheme.textSecondary),
+          style: TextStyle(fontSize: 10, color: onSurfaceVariant),
         ),
         const SizedBox(height: 2),
         Row(
@@ -102,24 +119,24 @@ class TelemetryCard extends StatelessWidget {
           children: [
             Text(
               value,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
-                fontWeight: FontWeight.bold,
-                color: AppTheme.textPrimary,
+                fontWeight: FontWeight.w600,
+                color: onSurface,
               ),
             ),
             const SizedBox(width: 4),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
               decoration: BoxDecoration(
-                color: statusColor.withValues(alpha: 0.15),
+                color: statusColor.withValues(alpha: 0.14),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
                 status,
                 style: TextStyle(
-                  fontSize: 9,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
                   color: statusColor,
                 ),
               ),

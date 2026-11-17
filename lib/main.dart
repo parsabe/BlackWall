@@ -5,6 +5,7 @@ import 'core/theme/app_theme.dart';
 import 'providers/auth_provider.dart';
 import 'providers/chat_provider.dart';
 import 'providers/settings_provider.dart';
+import 'screens/auth/forgot_password_screen.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup_screen.dart';
 import 'screens/chat/chat_screen.dart';
@@ -58,19 +59,24 @@ class BlackWallApp extends StatelessWidget {
           create: (_) => ChatProvider(blackwallService),
         ),
       ],
-      child: MaterialApp(
-        title: AppConstants.appName,
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.darkTheme,
-        home: const RouteGuard(
-          child: ChatScreen(),
+      child: Consumer<SettingsProvider>(
+        builder: (context, settings, _) => MaterialApp(
+          title: AppConstants.appName,
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: settings.themeMode,
+          home: const RouteGuard(
+            child: ChatScreen(),
+          ),
+          routes: {
+            '/login': (context) => const LoginScreen(),
+            '/signup': (context) => const SignupScreen(),
+            '/forgot-password': (context) => const ForgotPasswordScreen(),
+            '/chat': (context) => const RouteGuard(child: ChatScreen()),
+            '/settings': (context) => const RouteGuard(child: SettingsScreen()),
+          },
         ),
-        routes: {
-          '/login': (context) => const LoginScreen(),
-          '/signup': (context) => const SignupScreen(),
-          '/chat': (context) => const RouteGuard(child: ChatScreen()),
-          '/settings': (context) => const RouteGuard(child: SettingsScreen()),
-        },
       ),
     );
   }

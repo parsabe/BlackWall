@@ -17,8 +17,10 @@ class AppConstants {
   // Storage Keys
   static const String tokenKey = 'blackwall_auth_token';
   static const String userKey = 'blackwall_user_data';
+  static const String accountsKey = 'blackwall_accounts_db';
   static const String endpointKey = 'blackwall_endpoint_url';
   static const String timeoutKey = 'blackwall_timeout_sec';
+  static const String themeModeKey = 'blackwall_theme_mode';
 
   // Status Codes
   static const String statusReleased = 'released';

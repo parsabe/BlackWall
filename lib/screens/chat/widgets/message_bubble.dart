@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../models/chat_message.dart';
 import '../../../widgets/status_badge.dart';
+import 'formatted_message_text.dart';
 import 'telemetry_card.dart';
 
 class MessageBubble extends StatelessWidget {
@@ -11,43 +12,35 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final primary = theme.colorScheme.primary;
+    final surface = theme.colorScheme.surface;
+    final borderColor = theme.dividerColor;
+
     if (message.isUser) {
       return Align(
         alignment: Alignment.centerRight,
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+          margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
           constraints: BoxConstraints(
               maxWidth: MediaQuery.of(context).size.width * 0.78),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           decoration: BoxDecoration(
-            color: const Color(0xFF1E3A8A), // Deep Navy
+            color: primary,
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12),
-              topRight: Radius.circular(12),
-              bottomLeft: Radius.circular(12),
-              bottomRight: Radius.circular(2),
+              topLeft: Radius.circular(16),
+              topRight: Radius.circular(16),
+              bottomLeft: Radius.circular(16),
+              bottomRight: Radius.circular(4),
             ),
-            border: Border.all(color: Colors.blueAccent.withValues(alpha: 0.3)),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              const Text(
-                'USER OPERATOR',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.8,
-                  color: Colors.cyanAccent,
-                ),
-              ),
-              const SizedBox(height: 4),
-              SelectableText(
-                message.text,
-                style: const TextStyle(
-                    fontSize: 14, color: Colors.white, height: 1.4),
-              ),
-            ],
+          child: SelectableText(
+            message.text,
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.white,
+              height: 1.45,
+            ),
           ),
         ),
       );
@@ -57,16 +50,16 @@ class MessageBubble extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+        margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
         constraints:
             BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.90),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: AppTheme.surface,
-          borderRadius: BorderRadius.circular(10),
+          color: surface,
+          borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: _getBorderColor(message.status),
-            width: 1.2,
+            color: _getBorderColor(message.status, borderColor),
+            width: 1,
           ),
         ),
         child: Column(
@@ -80,18 +73,17 @@ class MessageBubble extends StatelessWidget {
                 spacing: 8,
                 runSpacing: 6,
                 children: [
-                  const Row(
+                  Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.shield, size: 14, color: AppTheme.primary),
-                      SizedBox(width: 6),
+                      Icon(Icons.shield_outlined, size: 15, color: primary),
+                      const SizedBox(width: 6),
                       Text(
-                        'BLACKWALL DEFENSE CORE',
+                        'BlackWall',
                         style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0.8,
-                          color: AppTheme.textPrimary,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: theme.colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -100,7 +92,7 @@ class MessageBubble extends StatelessWidget {
                 ],
               ),
             ),
-            const Divider(height: 16, color: AppTheme.border),
+            Divider(height: 18, color: borderColor),
 
             // Warning or Alert message if blocked or offline
             if (message.message != null && message.message!.isNotEmpty)
@@ -108,8 +100,8 @@ class MessageBubble extends StatelessWidget {
                 margin: const EdgeInsets.only(bottom: 10),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: _getAlertBgColor(message.status),
-                  borderRadius: BorderRadius.circular(6),
+                  color: _getAlertBgColor(message.status, theme),
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +109,7 @@ class MessageBubble extends StatelessWidget {
                     Icon(
                       _getAlertIcon(message.status),
                       size: 16,
-                      color: _getAlertFgColor(message.status),
+                      color: _getAlertFgColor(message.status, theme),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -125,7 +117,7 @@ class MessageBubble extends StatelessWidget {
                         message.message!,
                         style: TextStyle(
                           fontSize: 12,
-                          color: _getAlertFgColor(message.status),
+                          color: _getAlertFgColor(message.status, theme),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -134,15 +126,12 @@ class MessageBubble extends StatelessWidget {
                 ),
               ),
 
-            // Released Vetted Response
+            // Released Vetted Response with formatted code blocks
             if (message.isReleased && message.text.isNotEmpty)
-              SelectableText(
-                message.text,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: AppTheme.textPrimary,
-                  height: 1.5,
-                ),
+              FormattedMessageText(
+                text: message.text,
+                textColor: theme.colorScheme.onSurface,
+                fontSize: 14,
               ),
 
             // Trace Telemetry Card
@@ -154,36 +143,36 @@ class MessageBubble extends StatelessWidget {
     );
   }
 
-  Color _getBorderColor(String status) {
+  Color _getBorderColor(String status, Color defaultBorder) {
     switch (status) {
       case 'released':
-        return AppTheme.safeGreen.withValues(alpha: 0.5);
+        return defaultBorder;
       case 'blocked_ingress':
-        return AppTheme.criticalRed.withValues(alpha: 0.5);
+        return AppTheme.criticalRed.withValues(alpha: 0.45);
       case 'blocked_egress':
-        return Colors.purpleAccent.withValues(alpha: 0.5);
+        return Colors.purpleAccent.withValues(alpha: 0.45);
       case 'offline':
-        return AppTheme.warningAmber.withValues(alpha: 0.5);
+        return AppTheme.warningAmber.withValues(alpha: 0.45);
       default:
-        return AppTheme.border;
+        return defaultBorder;
     }
   }
 
-  Color _getAlertBgColor(String status) {
+  Color _getAlertBgColor(String status, ThemeData theme) {
     switch (status) {
       case 'released':
         return AppTheme.safeGreen.withValues(alpha: 0.1);
       case 'blocked_ingress':
       case 'blocked_egress':
-        return AppTheme.criticalRed.withValues(alpha: 0.12);
+        return AppTheme.criticalRed.withValues(alpha: 0.1);
       case 'offline':
         return AppTheme.warningAmber.withValues(alpha: 0.12);
       default:
-        return AppTheme.surfaceLight;
+        return theme.colorScheme.surfaceContainerHighest;
     }
   }
 
-  Color _getAlertFgColor(String status) {
+  Color _getAlertFgColor(String status, ThemeData theme) {
     switch (status) {
       case 'released':
         return AppTheme.safeGreen;
@@ -193,7 +182,7 @@ class MessageBubble extends StatelessWidget {
       case 'offline':
         return AppTheme.warningAmber;
       default:
-        return AppTheme.textPrimary;
+        return theme.colorScheme.onSurface;
     }
   }
 

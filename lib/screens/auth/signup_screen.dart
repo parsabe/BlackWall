@@ -47,7 +47,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ENROLL OPERATOR'),
+        title: Text('ENROLL OPERATOR'),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -63,20 +63,20 @@ class _SignupScreenState extends State<SignupScreen> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Text(
+                      Text(
                         'NEW OPERATOR REGISTRATION',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1.5,
-                          color: AppTheme.textPrimary,
+                          
                         ),
                       ),
                       const SizedBox(height: 6),
-                      const Text(
+                      Text(
                         'Enrolls identity into the BlackWall secure enclave.',
                         style: TextStyle(
-                            fontSize: 12, color: AppTheme.textSecondary),
+                            fontSize: 12, color: Theme.of(context).colorScheme.onSurfaceVariant),
                       ),
                       const SizedBox(height: 20),
 
@@ -99,9 +99,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
 
                       // Name
-                      const Text('FULL OPERATOR NAME',
+                      Text('FULL OPERATOR NAME',
                           style: TextStyle(
-                              fontSize: 11, color: AppTheme.textSecondary)),
+                              fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _nameController,
@@ -116,9 +116,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(height: 14),
 
                       // Email
-                      const Text('OFFICIAL EMAIL',
+                      Text('OFFICIAL EMAIL',
                           style: TextStyle(
-                              fontSize: 11, color: AppTheme.textSecondary)),
+                              fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _emailController,
@@ -138,15 +138,15 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(height: 14),
 
                       // Password
-                      const Text('CREATE PASSKEY',
+                      Text('CREATE PASSKEY',
                           style: TextStyle(
-                              fontSize: 11, color: AppTheme.textSecondary)),
+                              fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _passwordController,
                         obscureText: _obscurePassword,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.lock_outline, size: 18),
+                          prefixIcon: Icon(Icons.lock_outline, size: 18),
                           hintText: '••••••••••••',
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -165,9 +165,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(height: 14),
 
                       // Confirm Password
-                      const Text('CONFIRM PASSKEY',
+                      Text('CONFIRM PASSKEY',
                           style: TextStyle(
-                              fontSize: 11, color: AppTheme.textSecondary)),
+                              fontSize: 11, color: Theme.of(context).colorScheme.onSurfaceVariant)),
                       const SizedBox(height: 6),
                       TextFormField(
                         controller: _confirmController,
@@ -195,7 +195,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 child: CircularProgressIndicator(
                                     strokeWidth: 2, color: Colors.black),
                               )
-                            : const Text('REGISTER & INITIALIZE'),
+                            : Text('REGISTER & INITIALIZE'),
                       ),
                     ],
                   ),

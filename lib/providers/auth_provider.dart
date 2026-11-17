@@ -16,6 +16,13 @@ class AuthProvider extends ChangeNotifier {
   UserModel? get currentUser => _authService.currentUser;
   String? get errorMessage => _errorMessage;
 
+  void clearError() {
+    if (_errorMessage != null) {
+      _errorMessage = null;
+      notifyListeners();
+    }
+  }
+
   Future<void> initialize() async {
     final restored = await _authService.tryRestoreSession();
     _status = restored ? AuthStatus.authenticated : AuthStatus.unauthenticated;
@@ -56,6 +63,81 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return false;
     }
+  }
+
+  Future<String?> requestPasswordReset(String email) async {
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      return await _authService.requestPasswordReset(email);
+    } catch (e) {
+      _errorMessage = e.toString().replaceFirst('Exception: ', '');
+      notifyListeners();
+      return null;
+    }
+  }
+
+  Future<bool> resetPassword({
+    required String email,
+    required String code,
+    required String newPassword,
+  }) async {
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      await _authService.resetPassword(
+        email: email,
+        code: code,
+        newPassword: newPassword,
+      );
+      return true;
+    } catch (e) {
+      _errorMessage = e.toString().replaceFirst('Exception: ', '');
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> updateProfile({
+    required String name,
+    required String email,
+  }) async {
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      await _authService.updateProfile(name: name, email: email);
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _errorMessage = e.toString().replaceFirst('Exception: ', '');
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      await _authService.changePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+      return true;
+    } catch (e) {
+      _errorMessage = e.toString().replaceFirst('Exception: ', '');
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    await _authService.deleteAccount();
+    _status = AuthStatus.unauthenticated;
+    notifyListeners();
   }
 
   Future<void> logout() async {
