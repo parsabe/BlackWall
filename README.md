@@ -1,4 +1,7 @@
-# BlackWall: Autonomous AI Safety Barrier & Execution Sandbox
+# BlackWall: Protect an AI from going rogue via an AI
+
+
+
 
 [![Repository Branch: Master](https://img.shields.io/badge/branch-master-blue.svg)](https://github.com/parsabe/BlackWall/tree/master)
 [![Kernel Branch](https://img.shields.io/badge/branch-kernel-crimson.svg)](https://github.com/parsabe/BlackWall/tree/kernel)
