@@ -1,5 +1,9 @@
 # BlackWall App: Cross-Platform Flutter Client
 
+
+<img src="https://github.com/parsabe/BlackWall/blob/app/phone.png" align="center">
+
+
 [![Branch: App](https://img.shields.io/badge/branch-app-teal.svg)](https://github.com/parsabe/BlackWall/tree/app)
 [![Master Branch](https://img.shields.io/badge/branch-master-blue.svg)](https://github.com/parsabe/BlackWall/tree/master)
 [![Kernel Branch](https://img.shields.io/badge/branch-kernel-crimson.svg)](https://github.com/parsabe/BlackWall/tree/kernel)
